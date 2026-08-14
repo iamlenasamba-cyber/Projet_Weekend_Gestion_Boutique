@@ -1,0 +1,42 @@
+@startuml usecase inventaire
+left to right direction
+
+actor "inventaire" as I
+
+
+rectangle "inventaire"{
+     usecase "Voir statistiques boutique" as ECT
+    usecase "enregistrer un produit" as EPP
+    usecase "enregistre les clients" as ECC
+    usecase "enregistre les fournisseurs" as EFF
+   usecase "Se connecter / Se déconnecter" as AUTH
+
+    usecase "Gérer les Approvisionnements" as GA
+    usecase "Réceptionner une livraison" as RL
+    usecase "Lister les commandes" as LC
+
+    LC <.. RL : <<extend>>
+    GA <.. LC : <<extend>>
+    I -->GA
+    I -->ECT
+    I --> EPP 
+    I --> ECC 
+    I --> EFF 
+    GA ..> AUTH : <<include>>
+    EPP ..>AUTH : <<include>>
+    EFF ..>AUTH: <<include>>
+    ECC ..>AUTH: <<include>>
+    ECT ..>AUTH: <<include>>
+    
+}
+
+
+
+
+
+
+
+
+
+
+@enduml

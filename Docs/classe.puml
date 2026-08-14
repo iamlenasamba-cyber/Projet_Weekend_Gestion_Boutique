@@ -1,0 +1,117 @@
+@startuml Diagramme de Classes
+
+
+
+class Role {
+    adminBoutique
+    chargeVente
+    chargeStock
+    inventaire
+}
+
+class Utilisateur {
+    id
+    nom
+    prenom
+    email
+    motDePasse
+    + seConnecter()
+    + seDeconnecter()
+}
+
+class Produit {
+    id
+    nom
+    description
+    categorie
+    prix
+    seuilAlerte
+     quantiteDisponible
+}
+
+
+class Client {
+    id
+    nom
+    prenom
+    telephone
+    email
+    adresse
+}
+
+class Fournisseur {
+    id
+    nom
+    telephone
+    email
+    adresse
+}
+
+class Vente {
+    id
+    date
+    montantTotal
+    statut
+}
+
+class LigneVente {
+    id
+    quantite
+    prixUnitaire
+    sousTotal
+}
+
+
+
+class Dette {
+    id
+    montant
+    montantRestant
+    date
+    statut
+}
+
+class Remboursement {
+    id
+    montant
+    date
+}
+
+class Approvisionnement {
+    id
+    date
+    montantTotal
+    statut
+}
+
+class LigneApprovisionnement {
+    id
+    quantite
+    prixUnitaire
+    sousTotal
+}
+
+class reglement {
+    id
+    nomOperateur
+}
+
+
+Utilisateur "1" -- "1" Role
+
+reglement "1..*" -- "0..*" Vente
+Client "1" -- "0..*" Vente 
+
+Vente "1" -- "1..*" LigneVente 
+LigneVente "0..*" -- "1" Produit 
+
+Vente "1" -- "0..1" Dette 
+
+Dette "1" -- "0..*" Remboursement 
+Dette "0..*" -- "1" Client 
+
+Fournisseur "1" -- "0..*" Approvisionnement 
+Approvisionnement "1" -- "0..*" LigneApprovisionnement
+LigneApprovisionnement "0..*" -- "1" Produit 
+
+@enduml

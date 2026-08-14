@@ -1,0 +1,33 @@
+@startuml usecase inventaire
+left to right direction
+
+actor "chargeStock" as CS
+
+
+rectangle "inventaire"{
+     usecase "Voir statistiques boutique" as ECT
+    usecase "enregistrer un produit" as EPP
+    usecase "enregistre les clients" as ECC
+    usecase "enregistre les fournisseurs" as EFF
+   usecase "Se connecter / Se déconnecter" as AUTH
+    
+    CS -->ECT
+    CS --> EPP 
+    CS --> ECC 
+    CS --> EFF 
+   
+    EPP ..>AUTH : <<include>>
+    EFF ..>AUTH: <<include>>
+    ECC ..>AUTH: <<include>>
+}
+
+
+
+
+
+
+
+
+
+
+@enduml
