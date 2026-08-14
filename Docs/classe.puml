@@ -63,20 +63,6 @@ class LigneVente {
 
 
 
-class Dette {
-    id
-    montant
-    montantRestant
-    date
-    statut
-}
-
-class Remboursement {
-    id
-    montant
-    date
-}
-
 class Approvisionnement {
     id
     date
@@ -97,7 +83,7 @@ class reglement {
 }
 
 
-Utilisateur "1" -- "1" Role
+Utilisateur "0..*" -- "1" Role
 
 reglement "1..*" -- "0..*" Vente
 Client "1" -- "0..*" Vente 
@@ -105,10 +91,6 @@ Client "1" -- "0..*" Vente
 Vente "1" -- "1..*" LigneVente 
 LigneVente "0..*" -- "1" Produit 
 
-Vente "1" -- "0..1" Dette 
-
-Dette "1" -- "0..*" Remboursement 
-Dette "0..*" -- "1" Client 
 
 Fournisseur "1" -- "0..*" Approvisionnement 
 Approvisionnement "1" -- "0..*" LigneApprovisionnement
