@@ -36,3 +36,14 @@
 * **Difficultés / Obstacles rencontrés :**
   * J'ai eu du mal a comprendre le fonctionnement des méthodes `static` et du constructeur `private` pour le Singleton.
   *J'ai eu un peu de mal a comprendre comment foctionnait la connexion avec sqllite.
+
+  ### D. Entités POO Pure
+
+* **Heure de réalisation :**entre  10h et 14h30
+* **Ce qui a été fait :**
+  * je me suis rendu compte que l'enonce precisait clairement la table de dette alors je l'ai ajouté dans la base de donné et jai enleve la colonne montant restant de la table ventes
+  * creation du dossier model, entity et les fichers Client.php,Dette.php,Prouit.php
+  * j'ai cree les classes et j'y ai mis les methodes getter et setter pour pouvoir les manipuler ensuite car ils sont en private et j'ai mis la methode __construct pour l'initialisation a la creation 
+* **Difficultés / Obstacles rencontrés :**
+* j'ai eu des problemes a comprendre private, a quoi ça sert et son impacte sur la suite du programme
+* 

@@ -64,8 +64,6 @@ CREATE TABLE fournisseurs (
 CREATE TABLE produits (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(150) NOT NULL,
-    description VARCHAR(255),
-    categorie VARCHAR(100),
     prix NUMERIC(10, 2) NOT NULL,
     seuilAlerte INT,
     quantiteDisponible INT
@@ -75,7 +73,6 @@ CREATE TABLE ventes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date VARCHAR(50) DEFAULT CURRENT_DATE,
     montantTotal NUMERIC(10, 2) NOT NULL,
-    montantRestant NUMERIC(10, 2) NOT NULL,
     statut VARCHAR(30),
     client_id INT NOT NULL REFERENCES clients(id)
 );
@@ -110,4 +107,14 @@ CREATE TABLE ligneApprovisionnements (
     sousTotal NUMERIC(10, 2) NOT NULL,
     approvisionnement_id INT NOT NULL REFERENCES approvisionnements(id) ON DELETE CASCADE,
     produit_id INT NOT NULL REFERENCES produits(id)
+);
+
+CREATE TABLE Dette (
+    id INTEGER PRIMARY KEY,
+    montant NUMERIC(10, 2) NOT NULL,
+    montantRestant NUMERIC(10, 2) NOT NULL,
+    date VARCHAR(50) DEFAULT CURRENT_DATE,
+    statut VARCHAR(30),
+    vente_id INTEGER UNIQUE NOT NULL REFERENCES Vente(id),
+    client_id INTEGER NOT NULL REFERENCES Client(id)
 );
