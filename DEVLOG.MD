@@ -26,3 +26,13 @@
 - **Difficultés / Obstacles rencontrés** :
   - SQLite qui est un tout nouveau concept
   - Configuration des extensions vsCode pour visualiser la base SQLite.
+
+### C. Connexion à la base de données 
+
+* **Heure de réalisation :**entre  23h30 et 00h20
+* **Ce qui a été fait :**
+  * Création de la classe `Database.php` avec un Singleton pour n'avoir une seule instance de connexion ouverte.
+  * Mise en place du **fallback automatique** :  l'application essaie d'abord de se connecter à **PostgreSQL**, et si ça échoue, elle bascule automatiquement sur la base **SQLite **.
+* **Difficultés / Obstacles rencontrés :**
+  * J'ai eu du mal a comprendre le fonctionnement des méthodes `static` et du constructeur `private` pour le Singleton.
+  *J'ai eu un peu de mal a comprendre comment foctionnait la connexion avec sqllite.
