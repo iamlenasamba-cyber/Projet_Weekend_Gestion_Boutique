@@ -17,6 +17,10 @@ public function __construct(  ?int $id = null, float $montant = 0.00, float $mon
         $this->vente = $vente;
         $this->client = $client;
     }
+    public function setId(int $id): void 
+{
+    $this->id = $id;
+}
 
     public function getId(): ?int 
     {

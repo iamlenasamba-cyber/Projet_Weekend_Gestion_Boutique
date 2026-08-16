@@ -52,6 +52,8 @@ CREATE TABLE clients (
     email VARCHAR(150),
     adresse VARCHAR(255)
 );
+INSERT INTO clients (nom,prenom,telephone,email,adresse)
+VALUES ('Diop','Khadza','771112133','khadza@gmail.com','yeumbeul');
 
 CREATE TABLE fournisseurs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,6 +63,9 @@ CREATE TABLE fournisseurs (
     adresse VARCHAR(255)
 );
 
+INSERT INTO fournisseurs (nom,telephone,email,adresse) VALUES 
+('SEDIMA','776665544','sedima@gmail.com','Dakar');
+
 CREATE TABLE produits (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom VARCHAR(150) NOT NULL,
@@ -69,6 +74,9 @@ CREATE TABLE produits (
     quantiteDisponible INT
 );
 
+INSERT INTO produits (nom,prix,seuilAlerte,quantiteDisponible)
+VALUES ('Lait',125,5,100);
+
 CREATE TABLE ventes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date VARCHAR(50) DEFAULT CURRENT_DATE,
@@ -76,6 +84,8 @@ CREATE TABLE ventes (
     statut VARCHAR(30),
     client_id INT NOT NULL REFERENCES clients(id)
 );
+
+INSERT INTO ventes (montantTotal,statut,client_id) VALUES(2000,"EN_COURS","3");
 
 CREATE TABLE venteReglements (
     vente_id INT NOT NULL REFERENCES ventes(id) ON DELETE CASCADE,
@@ -91,6 +101,8 @@ CREATE TABLE ligneVentes (
     vente_id INT NOT NULL REFERENCES ventes(id) ON DELETE CASCADE,
     produit_id INT NOT NULL REFERENCES produits(id)
 );
+
+
 
 CREATE TABLE approvisionnements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -109,12 +121,44 @@ CREATE TABLE ligneApprovisionnements (
     produit_id INT NOT NULL REFERENCES produits(id)
 );
 
-CREATE TABLE Dette (
+CREATE TABLE dettes (
     id INTEGER PRIMARY KEY,
     montant NUMERIC(10, 2) NOT NULL,
     montantRestant NUMERIC(10, 2) NOT NULL,
     date VARCHAR(50) DEFAULT CURRENT_DATE,
     statut VARCHAR(30),
     vente_id INTEGER UNIQUE NOT NULL REFERENCES Vente(id),
-    client_id INTEGER NOT NULL REFERENCES Client(id)
+    client_id INTEGER NOT NULL REFERENCES clients(id)
 );
+
+
+
+
+SELECT v.*, c.nom AS client_nom, c.prenom AS client_prenom, 
+c.telephone AS client_telephone, 
+ c.email AS client_email, 
+c.adresse AS client_adresse
+FROM ventes v
+INNER JOIN clients c ON v.client_id = c.id
+ORDER BY v.id ASC;
+
+
+SELECT v.*, 
+c.nom AS client_nom, 
+c.prenom AS client_prenom, 
+c.telephone AS client_telephone, 
+c.email AS client_email, 
+c.adresse AS client_adresse
+FROM ventes v
+JOIN clients c ON v.client_id = c.id
+ORDER BY v.id DESC
+LIMIT 5;
+
+SELECT v.*, 
+c.nom AS client_nom, 
+c.prenom AS client_prenom, 
+c.telephone AS client_telephone, 
+c.email AS client_email
+FROM ventes v
+INNER JOIN clients c ON v.client_id = c.id
+WHERE v.id = 1;

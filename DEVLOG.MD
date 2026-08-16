@@ -37,7 +37,8 @@
   * J'ai eu du mal a comprendre le fonctionnement des méthodes `static` et du constructeur `private` pour le Singleton.
   *J'ai eu un peu de mal a comprendre comment foctionnait la connexion avec sqllite.
 
-  ### D. Entités POO Pure
+###  [Samedi - Phase 2] 
+  ### A. Entités POO Pure
 
 * **Heure de réalisation :**entre  10h et 14h30
 * **Ce qui a été fait :**
@@ -47,3 +48,23 @@
 * **Difficultés / Obstacles rencontrés :**
 * j'ai eu des problemes a comprendre private, a quoi ça sert et son impacte sur la suite du programme
 * 
+  ### B. Repositories & SQL Sécurisé
+
+
+* **Heure de réalisation :**entre  15h et 20h
+* **Ce qui a été fait :**
+  * J'ai realisé ProduitRepository.php: j'ai cree une classe puis j'ai instancier Database et je me suis connecté a la base de donnée. J'ai ensuite ecris les methodes metiers (getAllProduits: pour recuperer tout les produits, getProduitById pour recuperer un produit de par son id, saveProduit pour enregistrer un produit dans la table produits). Vu que la base retourne un tableau associatif, pour la conversion en un objet j'ai ecris la methode hydrate qui transforme le tableau associatif en un objet de type produit.
+  
+  * J'ai realisé ClientRepository.php: j'ai cree une classe ClientRepository.php, j'ai instancier Database puis je me suis connecté. J'ai realiser les methodes metiers getAllClients: qui par une requete select recupere tout les clients, getClientById: qui recupere un client de par son id, saveClient : qui enregistre un client dans la base de donnee et la methode hydrate qui sert a convertir un tableau associatif a un objet de type Client a defaut d'utiliser FETCH_CLASS
+
+  * J'ai realisé VenteRepository en me connectant comme dans tout les autres repository . J'ai realisé les methodes getAllventes qui recupere toutes les ventes depuis la base de donnes, getVentesRecentes qui recupere les ventes de 0 a 5 avec la contrainte LIMIT dans la requete, getVenteById qui recupere une vente de par son id, saveVente qui enregistre une vente dans la base de donne, par ailleurs, la methode saveVente enregistre les ligne de Ventes de la vente dans la table ligneVente, aussi la methode met a jour la quantite dans la table produits. Pour harmoniser le tout , j'ai utiliser une transaction pour que toutes ces requetes reuississent ensemble ou echouent ensembles.J'ai aussi realiser la methode hydrate pour la conversion des tableaux associatifs en des objet de type Vente
+  
+  * J'ai assi realisé FournisseurRepository par le meme processus que tout les autres repository. J'ai la methode __construct qui me permet de me connecter a la base de donnes, J'ai les methodes getAllFournisseurs, getFournisseurById,saveFournisseur et hydrate
+  
+  * J'ai ajouter un setter setId() dans tout les fichers de Entity car je me suis rendu compte que j'avais besoin d'une methode qui enregistre l'id dans les classes
+
+   * J'ai ajouter le ficher router.php et le dossier controllers,views bien qu'ils soient vides pour le moment
+  
+  
+* **Difficultés / Obstacles rencontrés :**
+* J'ai eu beaucoup de mal a realiser les fichers repository car j'ai l'habitude de coder en procedural surtout VenteRepository.php .Mais une fois que j'ai realiser l'un les autres ont été un peu plus abordables

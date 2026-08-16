@@ -14,6 +14,10 @@ class Fournisseur {
         $this->email = $email;
         $this->adresse = $adresse;
     }
+    public function setId(int $id): void 
+{
+    $this->id = $id;
+}
 
     public function getId(): ?int 
     {

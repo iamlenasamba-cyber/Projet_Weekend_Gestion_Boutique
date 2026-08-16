@@ -16,6 +16,10 @@ class LigneVente {
         $this->produit = $produit;
         $this->sousTotal = ($sousTotal > 0.00) ? $sousTotal : ($this->quantite * $this->prixUnitaire);
     }
+    public function setId(int $id): void 
+{
+    $this->id = $id;
+}
     public function getId(): ?int 
     {
         return $this->id;
