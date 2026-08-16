@@ -68,3 +68,9 @@
   
 * **Difficultés / Obstacles rencontrés :**
 * J'ai eu beaucoup de mal a realiser les fichers repository car j'ai l'habitude de coder en procedural surtout VenteRepository.php .Mais une fois que j'ai realiser l'un les autres ont été un peu plus abordables
+   ### B. Repositories & SQL Sécurisé
+
+   **Ce qui a été fait :**
+   * J'ai realiser VenteService: Je me suis connecté et j'ai instancier Venterepository. J'ai realiser la methode enregistrerVente.Pour ce faire j'ai d'abord verifier si le panier est vide(Le panier est composer des ligneVentes qui seront enregistrés dans la session dans le controller),sinon je recupere tout les donnes dans panier que je vais utiliser pour creer des objets de type LigneVente. J'ai aussi creer un objet de type vente.Ensuite j'ai appellé la methode saveVente qui se trouv dans repository, pour enregistrer la vente dans la base de donnes. Enfin je verifie si la vente a reussi sinon je capte un message avec throw new exception, je vide le panier pour terminer.
+  
+  
