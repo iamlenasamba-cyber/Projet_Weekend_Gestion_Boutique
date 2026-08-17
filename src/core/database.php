@@ -1,53 +1,34 @@
 <?php
 
-class Database{
-        private static ?Database $instance = null;
-         private PDO $connexion;
-
-            private function __construct()
-            {
-            $this->connexion = $this->connecter();
-        }
-
-    public static function getInstance(): Database{ 
-             if (self::$instance === null) {
-            self::$instance = new Database();
-        }
-        return self::$instance;
-    }
-
-    public function getConnexion(): PDO
+class Database
+{
+    private static ?PDO $connexion = null;
+    private function __construct() {}
+    public static function getConnexion(): PDO
     {
-        return $this->connexion;
-    }
-      private function connecter(): PDO
-     {
-        try {
-               $db = "pgsql:host=localhost;port=5432;dbname=gestionboutique";
-            return new PDO($db, 'lena', 'Sokhnadiouf6', [
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        if (self::$connexion === null) {
+            try {
+                $db = "pgsql:host=localhost;port=5432;dbname=gestionboutique";
+                self::$connexion = new PDO($db, 'lena', 'Sokhnadiouf6', [
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]);
 
             } catch (PDOException $e) {
                 try {
                     $sqlPath = dirname(__DIR__, 2) . '/db/erp.db';
-                    $pdo = new PDO("sqlite:" . $sqlPath, null, null, [
+                    self::$connexion = new PDO("sqlite:" . $sqlPath, null, null, [
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-                ]);
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    ]);
+                    self::$connexion->exec("PRAGMA foreign_keys = ON;");
 
-
-                $pdo->exec("PRAGMA foreign_keys = ON;");
-                         return $pdo;
-
-                    }
-                
-                    
-                    
-                    catch (PDOException $ex) {
-                        die("Erreur de connexion : " . $ex->getMessage());
-                    }
+                } catch (PDOException $ex) {
+                    die("Erreur de connexion : " . $ex->getMessage());
+                }
+            }
         }
+
+        return self::$connexion;
     }
 }
